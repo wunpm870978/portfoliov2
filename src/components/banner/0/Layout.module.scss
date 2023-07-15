@@ -1,0 +1,73 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  max-width: 100%;
+  pointer-events: initial;
+  height: 700px;
+  overflow: hidden;
+
+  .parallaxWrapper {
+    display: flex;
+    position: relative;
+    // overflow-x: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+    flex-wrap: inherit;
+    width: 100%;
+    height: 700px;
+    transition: left 0.5s linear;
+
+    .parallax {
+      // display: block;
+      // position: relative;
+      flex-shrink: 0;
+      // width: 100%;
+      height: 100%;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      transition: width 1s ease-in-out;
+    }
+  }
+
+  .parallaxWrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .swiperBtnWrapper {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translateY(-50%);
+    width: 100%;
+    justify-content: space-between;
+    z-index: 2;
+    cursor: pointer;
+
+    .swiperBtn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 52px;
+      height: 52px;
+      background-color: #00000061;
+      color: white;
+      font-size: 22px;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 768px) {}

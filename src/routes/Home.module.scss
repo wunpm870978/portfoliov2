@@ -1,0 +1,273 @@
+@mixin clearFix {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0px auto;
+}
+
+@mixin bannerWrapper {
+  width: 100%;
+  max-width: 100%;
+  padding: 30px;
+}
+
+$s: 3px;
+
+.burgerBtnWrapper {
+  display: block;
+  position: relative;
+  width: max-content;
+}
+
+.burgerWrapper {
+  cursor: pointer;
+  margin: auto;
+  width: $s*10;
+  height: $s*8;
+
+  .hamburger {
+    background: black;
+    width: $s*8;
+    height: $s;
+    position: relative;
+    transition: background 10ms 300ms ease;
+    transform: translateY($s*4);
+
+    &:before,
+    &:after {
+      transition: top 300ms 350ms ease,
+        transform 300ms 50ms ease;
+      position: absolute;
+      background: black;
+      width: $s*10;
+      height: $s;
+      content: '';
+    }
+
+    &:before {
+      top: $s*-3;
+    }
+
+    &:after {
+      top: $s*3;
+    }
+  }
+}
+
+.burgerBtnWrapperActive {
+  .burgerWrapper {
+    .hamburger {
+      background: transparent;
+
+      &:after,
+      &:before {
+        transition: top 300ms 50ms ease,
+          transform 300ms 350ms ease;
+        top: 0;
+      }
+
+      &:before {
+        transform: rotate(45deg);
+      }
+
+      &:after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+
+/* DEMO-SPECIFIC STYLES */
+.typewriter {
+  display: block;
+  width: max-content;
+  height: 50px;
+  text-align: start;
+  font-family: 'Waiting for the Sunrise', cursive;
+  font-size: 50px;
+  line-height: 1;
+  border-right: 4px solid orange;
+  padding-right: 3px;
+  animation: blink 0.5s ease infinite alternate-reverse;
+}
+
+/* The typewriter cursor effect */
+@keyframes blink {
+
+  from,
+  to {
+    border-color: transparent
+  }
+
+  50% {
+    border-color: orange
+  }
+}
+
+.root {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+
+  >div {
+    @include clearFix;
+  }
+
+  .navTop {
+    display: flex;
+    position: sticky;
+    padding: 30px 20px;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .banner {
+    display: block;
+    position: relative;
+    height: 100vh;
+
+    .textBlock {
+      display: inline-block;
+      position: relative;
+      width: 50%;
+      vertical-align: middle;
+
+      .text {
+        font-family: 'Waiting for the Sunrise', cursive;
+        font-size: 50px;
+        line-height: 1;
+        margin-bottom: 20px;
+      }
+
+      .contact {
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 20px;
+        font-size: 30px;
+
+        .icon {
+          cursor: pointer;
+        }
+
+        .icon:hover {
+          color: bisque;
+        }
+      }
+    }
+
+    .imgBlock {
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      width: 50%;
+      background-image: url('../../public/assets/umbrella.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100%;
+      background-size: contain;
+    }
+  }
+
+  .banner2 {
+    width: 100%;
+    max-width: 100%;
+    height: 500px;
+    background-color: #ffe164;
+    overflow: hidden;
+    padding: 30px;
+    box-sizing: border-box;
+
+    >div {
+      @include clearFix;
+    }
+  }
+
+  .timeLineWrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: 0px auto;
+  }
+
+  .flexBlock {
+    @include clearFix;
+    display: flex;
+    gap: 2em;
+    padding: 30px;
+    justify-content: center;
+
+    .block {
+      width: 300px;
+      padding: 2em;
+      text-align: center;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      text-align: center;
+
+      .title {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        font-weight: 700;
+        color: #444;
+        margin-bottom: 1em;
+      }
+
+      .description {
+        color: #555555;
+        margin-bottom: 1em;
+      }
+
+      .langTag {
+        display: flex;
+        position: relative;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0px;
+
+        .tag {
+          flex-shrink: 0;
+          font-weight: 500;
+          font-size: .8rem;
+          padding: 5px;
+          user-select: none;
+        }
+      }
+
+      .iconWrapper {
+        display: flex;
+        gap: 10px;
+        font-size: 20px;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .block:hover {
+      transform: translateY(-10px);
+      transition: all 0.7s ease;
+    }
+  }
+
+  .memo {
+    @include bannerWrapper
+  }
+
+  .headerTitlte {
+    margin: 0px auto;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+  }
+
+}
+
+.root::-webkit-scrollbar {
+  display: none;
+}
