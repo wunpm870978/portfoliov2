@@ -135,7 +135,7 @@ $s: 3px;
       width: 100%;
       max-width: 900px;
       height: 60%;
-      justify-content: start;
+      justify-content: flex-start;
 
       .item {
         display: block;
@@ -202,13 +202,15 @@ $s: 3px;
         display: flex;
         gap: 40px;
         // justify-content: center;
-        align-items: center;
+        // align-items: center;
+        line-height: 1.5;
         padding: 10px 0px;
         font-size: 30px;
 
         .icon {
           cursor: pointer;
           color: white;
+          display: flex;
         }
 
         .icon:hover {
@@ -243,6 +245,12 @@ $s: 3px;
     >div {
       @include clearFix;
     }
+  }
+
+  .textTitle{
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
   }
 
 
@@ -288,7 +296,7 @@ $s: 3px;
         position: relative;
         flex-wrap: wrap;
         justify-content: center;
-        align-items: end;
+        align-items: flex-end;
         margin: 20px 0px;
 
         .tag {
