@@ -7,10 +7,11 @@ import {
   WhatsAppOutlined,
   LinkedinOutlined,
   ExportOutlined,
+  CoffeeOutlined,
+  AuditOutlined,
 } from '@ant-design/icons';
-import { Timeline } from "antd";
+import { Timeline, Result } from "antd";
 import { PROJECTS } from '../defaults';
-
 const FORWARD = 'forward';
 const BACKWARD = 'backward';
 const PAUSE = 'pause';
@@ -18,12 +19,13 @@ const words = 'A Web and App Developer';
 
 const HomeLayout = () => {
   const autoTypeRef = useRef(null)
-  const [isNavOpen, setIsNavOpen] = useState(false);
-
   const direction = useRef(FORWARD);
   const speedRef = useRef(300)
   const typingInterval = useRef();
+  const [isBounceInDown, setIsBounceInDown] = useState(false)
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
+  // typewriting animation initialization
   useEffect(() => {
     const typeLetter = () => {
       if (!autoTypeRef.current.innerHTML) {
@@ -44,7 +46,7 @@ const HomeLayout = () => {
       }
     }
     const waiting = () => {
-      clearInterval(autoTypeRef.current)
+      clearInterval(typingInterval.current)
       setTimeout(() => {
         if (autoTypeRef.current.innerHTML.length !== 0) {
           direction.current = BACKWARD;
@@ -53,25 +55,40 @@ const HomeLayout = () => {
           direction.current = FORWARD;
           speedRef.current = 300;
         }
+        typingInterval.current = setInterval(() => {
+          autoTypingAnimation()
+        }, speedRef.current)
       }, 2000)
     }
-
-
-    autoTypeRef.current && (typingInterval.current = setInterval(() => {
+    const autoTypingAnimation = () => {
       if (direction.current === FORWARD) {
         typeLetter();
       } else if (direction.current === BACKWARD) {
         backspace();
       } else {
-        console.log('mlw speedRef.current', speedRef.current)
         waiting()
       }
+    }
+    autoTypeRef.current && (typingInterval.current = setInterval(() => {
+      autoTypingAnimation()
     }, speedRef.current));
 
     return () => {
       clearInterval(typingInterval.current);
     }
   }, []);
+
+
+  useEffect(() => {
+    if (isBounceInDown) {
+      setIsNavOpen(true)
+    } else {
+      setTimeout(() => {
+        setIsNavOpen(false)
+      }, 1000)
+    }
+
+  }, [isBounceInDown])
 
   return (
     <div className={s.root}>
@@ -80,57 +97,142 @@ const HomeLayout = () => {
           notlogo
         </div>
         <div
-          className={cx(s.burgerBtnWrapper, isNavOpen && s.burgerBtnWrapperActive)}
-          onClick={() => {
-            setIsNavOpen(prev => !prev)
-          }}
+          className={cx(s.burgerBtnWrapper, isBounceInDown && s.burgerBtnWrapperActive)}
+          onClick={() => setIsBounceInDown(prev => !prev)}
         >
           <div className={s.burgerWrapper}>
             <div className={s.hamburger} />
           </div>
         </div>
       </div>
-      <div className={s.banner}>
-        <div className={s.textBlock}>
-          <div className={s.text}>
-            HI
+      {isNavOpen && <div
+        className={cx(s.menu, `animate__animated ${isBounceInDown
+          ? 'animate__bounceInDown'
+          : 'animate__bounceOutUp'}`
+        )}
+      >
+        <div className={s.itemWrapper}>
+          <div className={s.item}>
+            <div className={s.menuItem}>
+              Home
+            </div>
+            <div className={s.menuItem}>
+              HISTORY
+            </div>
+            <div className={s.menuItem}>
+              PROJECTS
+            </div>
+            <div className={s.menuItem}>
+              CONTACT
+            </div>
           </div>
-          <div className={s.text}>
-            I am Thoson Anmas
-          </div>
-          <div ref={autoTypeRef} className={s.typewriter}></div>
-          <div className={s.contact}>
-            <GithubOutlined className={s.icon} />
-            <MailOutlined className={s.icon} />
-            <WhatsAppOutlined className={s.icon} />
-            <LinkedinOutlined className={s.icon} />
+          <div className={s.item}>
+            i am text
           </div>
         </div>
-        <div className={s.imgBlock} />
+      </div>}
+      <div className={s.banner} style={{ background: '#23283e' }}>
+        <div>
+          <div className={s.textBlock}>
+            <div className={s.text}>
+              {'HI :)'}
+            </div>
+            <div className={s.text}>
+              I am Peter Mak
+            </div>
+            <div ref={autoTypeRef} className={s.typewriter}></div>
+            <div className={s.contact}>
+              <GithubOutlined className={s.icon} />
+              <a href="mailto:petermakwork@gmail.com">
+                <MailOutlined className={s.icon} />
+              </a>
+              <a
+                target='_blank'
+                href="https://api.whatsapp.com/send?phone=85293369792">
+                <WhatsAppOutlined className={s.icon} />
+              </a>
+              <LinkedinOutlined className={s.icon} />
+            </div>
+          </div>
+          <div className={s.imgBlock} />
+        </div>
       </div>
-      <div className={s.banner2}>
+      <div className={s.banner2} style={{ height: 'auto' }}>
+        <div className={s.headerTitlte}>
+          HISTORY
+        </div>
         <Timeline
           mode='left'
           items={[
             {
-              label: 'Present',
-              children: 'Create a services',
+              label: 'June 2022 - Present',
+              color: '#D1900A',
+              dot: <CoffeeOutlined style={{ fontSize: '18px' }} />,
+              children: <div>
+                <div>
+                  Web developer
+                </div>
+                <div>
+                  Initial Innovation Limited
+                </div>
+              </div>,
             },
             {
-              label: '2015-09-01 09:12:11',
-              children: 'Solve initial network problems',
+              label: '2021-2022',
+              dot: <AuditOutlined style={{ fontSize: '18px' }} />,
+              children: <div>
+                <div>
+                  MSc INFORMATION TECHNOLOGY
+                </div>
+                <div>
+                  The Hong Kong Polytechnic University
+                </div>
+              </div>,
             },
             {
-              children: 'Technical testing',
+              label: 'May - September 2021',
+              color: '#D1900A',
+              dot: <CoffeeOutlined style={{ fontSize: '18px' }} />,
+              children: <div>
+                <div>
+                  Web and App developer
+                </div>
+                <div>
+                  CLOZEUPP AUTO TECH LTD
+                </div>
+              </div>,
             },
             {
-              label: '2015-09-01 09:12:11',
-              children: 'Network problems being solved',
+              label: '2019-2021',
+              dot: <AuditOutlined style={{ fontSize: '18px' }} />,
+              children: <div>
+                <div>
+                  BEng (Hons) Degree Programme in Electronic and Information Engineering
+                </div>
+                <div>
+                  The Hong Kong Polytechnic University
+                </div>
+              </div>,
+            },
+            {
+              label: '2017-2019',
+              dot: <AuditOutlined style={{ fontSize: '18px' }} />,
+              children: <div>
+                <div>
+                  Higher Diploma in Electronic and Information Engineering
+                </div>
+                <div>
+                  The Hong Kong Polytechnic University
+                </div>
+              </div>,
             },
           ]}
         />
       </div>
-      <div className={s.memo} style={{ background: '#cccc33' }}>
+      <div className={s.banner2} style={{ background: 'linear-gradient(43deg,#4158d0,#c850c0 46%,#ffcc70)' }}>
+        Skills
+      </div>
+      <div className={s.memo}>
         <div className={s.headerTitlte}>
           PROJECTS
         </div>
@@ -140,7 +242,7 @@ const HomeLayout = () => {
               {obj.type !== 'TBC'
                 ? <React.Fragment>
                   <div className={s.title}>{obj.title}</div>
-                  <div>{obj.description}</div>
+                  <div className={s.description}>{obj.description}</div>
                   <div className={s.langTag}>
                     {obj.lang.map(item => {
                       return <div className={s.tag}>{item}</div>
@@ -151,17 +253,19 @@ const HomeLayout = () => {
                     <ExportOutlined />
                   </div>
                 </React.Fragment>
-                : 'To be Continue'
+                : <Result
+                  status="404"
+                  title={obj.type}
+                  subTitle="Looking forward to my next idea"
+                />
               }
             </div>
           })}
         </div>
       </div>
-      <div className={s.banner2}>
-        Education
-      </div>
-      <div className={s.banner2} style={{ background: 'white' }}>
+      <div className={s.banner2} style={{ background: 'green' }}>
         FOOTER
+        last update 2023-07-16
       </div>
     </div>
   )
