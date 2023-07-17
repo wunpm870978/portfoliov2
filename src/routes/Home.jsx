@@ -162,19 +162,22 @@ const HomeLayout = () => {
             </div>
             <div ref={autoTypeRef} className={s.typewriter}></div>
             <div className={s.contact}>
-              <GithubOutlined className={s.icon} style={{ alignSelf: 'flex-start' }} />
+              <GithubOutlined className={s.icon} />
               <a
                 rel="noreferrer"
                 href="mailto:petermakwork@gmail.com">
-                <MailOutlined className={s.icon} style={{ alignSelf: 'flex-end' }} />
+                <MailOutlined className={s.icon} />
               </a>
               <a
                 rel="noreferrer"
                 target='_blank'
                 href="https://api.whatsapp.com/send?phone=85293369792">
-                <WhatsAppOutlined className={s.icon} style={{ alignSelf: 'flex-start' }} />
+                <WhatsAppOutlined className={s.icon} />
               </a>
-              <LinkedinOutlined className={s.icon} style={{ alignSelf: 'flex-end' }} />
+              <LinkedinOutlined className={s.icon} />
+              {/* <div className={s.text}>
+                {'  find me'}
+              </div> */}
             </div>
           </div>
           <div className={s.imgBlock} />

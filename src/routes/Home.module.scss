@@ -194,27 +194,29 @@ $s: 3px;
         font-family: 'Waiting for the Sunrise', cursive;
         font-size: 50px;
         line-height: 1;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         color: white;
       }
 
       .contact {
         display: flex;
-        gap: 40px;
-        // justify-content: center;
-        // align-items: center;
+        gap: 50px;
         line-height: 1.5;
         padding: 10px 0px;
         font-size: 30px;
+        margin-top: 40px;
 
         .icon {
           cursor: pointer;
           color: white;
           display: flex;
+          transition: all 0.4s ease-in;
+          font-size: 35px;
         }
 
         .icon:hover {
           color: bisque;
+          transform: scale(1.2);
         }
       }
     }
