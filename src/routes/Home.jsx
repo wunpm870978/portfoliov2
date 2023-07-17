@@ -32,11 +32,9 @@ const HomeLayout = () => {
   const [isDesktop, setIsDesktop] = useState(width > 768);
   const [descBody, setDescBody] = useState({});
   const sortedExperience = useMemo(() => {
-    console.log('mlw enter', cloneDeep(EXPERIENCE))
-    return EXPERIENCE.reverse()
+    return cloneDeep(EXPERIENCE.reverse())
   }, [])
 
-  console.log('sortedExperience', cloneDeep(sortedExperience))
 
   useEffect(() => {
     const typeLetter = () => {
@@ -342,7 +340,6 @@ const HomeLayout = () => {
           </Descriptions.Item>
           {!isEmpty(descBody.highlight) && <Descriptions.Item label="highlight" span={4}>
             {descBody.highlight.map(item => {
-              console.log('mlw item', item)
               return <React.Fragment>
                 {item}
                 <br />
