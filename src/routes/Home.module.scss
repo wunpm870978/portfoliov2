@@ -226,7 +226,7 @@ $s: 3px;
       vertical-align: middle;
       position: relative;
       width: 50%;
-      background-image: url('../../public/assets/astronaut.png');
+      background-image: url('../../public/assets/officeboy.png');
       background-position: center;
       background-repeat: no-repeat;
       height: 100%;
@@ -262,72 +262,6 @@ $s: 3px;
     }
   }
 
-  .flexBlock {
-    @include clearFix;
-    display: flex;
-    gap: 2em;
-    // padding: 30px;
-    justify-content: center;
-
-    .block {
-      width: 300px;
-      padding: 2em;
-      text-align: center;
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-      text-align: center;
-      transition: all 0.7s linear;
-
-
-      .title {
-        font-size: 1.5rem;
-        line-height: 1.2;
-        font-weight: 700;
-        color: #444;
-        margin-bottom: 1em;
-      }
-
-      .description {
-        color: #555;
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 1.3;
-      }
-
-      .langTag {
-        display: flex;
-        position: relative;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: flex-end;
-        margin: 20px 0px;
-
-        .tag {
-          flex-shrink: 0;
-          font-weight: 600;
-          font-size: .8rem;
-          padding: 5px;
-          color: #444;
-          user-select: none;
-        }
-      }
-
-      .iconWrapper {
-        display: flex;
-        gap: 10px;
-        font-size: 20px;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-
-    .block:hover {
-      transform: translateY(-10px);
-    }
-  }
-
-  .memo {
-    @include bannerWrapper
-  }
 
   .headerTitlte {
     margin: 0px auto 30px auto !important;

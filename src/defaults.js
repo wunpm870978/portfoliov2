@@ -1,18 +1,21 @@
 export const PROJECTS = [
   {
     type: 'done',
+    images: [],
     title: 'Responsive Portfolio',
     description: 'A fully responsive website displaying personal portfolio with simple and awesome css aniamtion',
     lang: ['ReactJS', 'SCSS']
   },
   {
-    type: 'progress',
+    type: 'working',
+    images: ['/assets/working.jpg'],
     title: 'Course Registration System',
     description: 'A system admin panel allowing differnt roles to tackle account affairs like course CURD, registration & schedule planning',
     lang: ['ReactJS', 'SCSS', 'ExpressJS', 'MongDB']
   },
   {
     type: 'TBC',
+    images: [],
     title: '',
     description: '',
     lang: []
@@ -25,7 +28,10 @@ export const EXPERIENCE = [
     position: 'Web developer',
     institution: 'Initial Innovation Limited',
     highlight: [
-      'Maintain Customized E-commerce platform',
+      'Enrich UI components and interactive user interfaces',
+      'Integrate different APIs for e-commerce chatting, order notification and product image processing',
+      'Optimize tracking tools from Facebook Pixel to Conversion API through middleware platform',
+      'Scrape website data, extract details and be converted into desired format',
     ]
   },
   {
@@ -33,7 +39,10 @@ export const EXPERIENCE = [
     position: 'MSc INFORMATION TECHNOLOGY',
     institution: 'The Hong Kong Polytechnic University',
     highlight: [
-      'Artificial Intelligence, Big Data and Financial Technology',
+      'Further study on image processing on extracting the characteristics from edges, remove noises and smoothen image',
+      'Learnt to use docker in large-scale projects for code and version control',
+      'Familiar with the set-up of oracle of role authorization and CRUD of table data',
+      'Preprocessing large data-set. adopting into prediction model and improve the results',
     ]
   },
   {
@@ -52,7 +61,9 @@ export const EXPERIENCE = [
     position: 'BEng (Hons) Degree Programme in Electronic and Information Engineering',
     institution: 'The Hong Kong Polytechnic University',
     highlight: [
-
+      'Improve and optimize the four-leg robot to complete a path cycle',
+      'Examine hardware circuit whether it could support software instructions',
+      'Robot programmed by Arduino and could be controlled by an App through Bluetooth'
     ]
   },
   {

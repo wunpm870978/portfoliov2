@@ -10,10 +10,12 @@ import {
   CoffeeOutlined,
   AuditOutlined,
 } from '@ant-design/icons';
-import { Timeline, Result, Modal, Descriptions } from "antd";
+import { Timeline, Result, } from "antd";
 import { PROJECTS, EXPERIENCE, SKILLS } from '../defaults';
 import useWindowSize from './../hook/useWindowSize';
-import { isEmpty, cloneDeep } from "lodash";
+import { cloneDeep } from "lodash";
+import ModalLayout0 from "../components/modal/0/Layout";
+import BannerLayout1 from "../components/banner/1/Layout";
 
 const FORWARD = 'forward';
 const BACKWARD = 'backward';
@@ -97,7 +99,6 @@ const HomeLayout = () => {
     setDescBody(result)
     setIsModalOpen(true)
   }
-
 
   useEffect(() => {
     if (isBounceInDown) {
@@ -271,86 +272,22 @@ const HomeLayout = () => {
       <div className={s.banner2} style={{ background: 'linear-gradient(43deg,#4158d0,#c850c0 46%,#ffcc70)' }}>
         Skills
         <div>
-          {SKILLS.map(item => {
-            return <img src={`/assets/${item}-ar21.svg`} alt='' />
+          {SKILLS.map((item, index) => {
+            return <img key={`skill_${index}`} src={`/assets/${item}-ar21.svg`} alt='' />
           })}
         </div>
       </div>
-      <div className={s.memo}>
-        <div className={s.headerTitlte}>
-          PROJECTS
-        </div>
-        <div className={s.flexBlock}>
-          {PROJECTS.map(obj => {
-            return <div className={s.block}>
-              {obj.type !== 'TBC'
-                ? <React.Fragment>
-                  <div className={s.title}>{obj.title}</div>
-                  <div className={s.description}>{obj.description}</div>
-                  <div className={s.langTag}>
-                    {obj.lang.map(item => {
-                      return <div className={s.tag}>{item}</div>
-                    })}
-                  </div>
-                  <div className={s.iconWrapper}>
-                    <GithubOutlined />
-                    <ExportOutlined />
-                  </div>
-                </React.Fragment>
-                : <Result
-                  status="404"
-                  title={obj.type}
-                  subTitle="Looking forward to my next idea"
-                />
-              }
-            </div>
-          })}
-        </div>
-      </div>
+      <BannerLayout1 title='PROJECTS' data={PROJECTS} />
       <div className={s.banner2} style={{ background: 'green' }}>
         FOOTER
         last update 2023-07-16
       </div>
-      <Modal
-        open={isModalOpen}
-        onCancel={() => setIsModalOpen(false)}
-        footer={null}
-        width={isDesktop ? '60%' : '95%'}
-        bodyStyle={{
-          padding: '10px 0px 30px 0px'
-        }}
-      >
-        <Descriptions
-          bordered
-          column={{
-            xxl: 4,
-            xl: 3,
-            lg: 3,
-            md: 3,
-            sm: 2,
-            xs: 1,
-          }}
-          title="My history"
-        >
-          <Descriptions.Item label="period" span={3}>
-            {descBody.period}
-          </Descriptions.Item>
-          <Descriptions.Item label="institution" span={3}>
-            {descBody.institution}
-          </Descriptions.Item>
-          <Descriptions.Item label="position" span={4}>
-            {descBody.position}
-          </Descriptions.Item>
-          {!isEmpty(descBody.highlight) && <Descriptions.Item label="highlight" span={4}>
-            {descBody.highlight.map(item => {
-              return <React.Fragment>
-                {item}
-                <br />
-              </React.Fragment>
-            })}
-          </Descriptions.Item>}
-        </Descriptions>
-      </Modal>
+      <ModalLayout0
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        data={descBody}
+        isDesktop={isDesktop}
+      />
     </div>
   )
 }
