@@ -44,11 +44,9 @@ const BannerLayout1 = ({
                   <ExportOutlined />
                 </div>
               </React.Fragment>
-              : <Result
-                status="404"
-                title={obj.type}
-                subTitle="Looking forward to my next idea"
-              />
+              : <div>
+                
+              </div>
             }
           </div>
         })}

@@ -16,6 +16,7 @@ import useWindowSize from './../hook/useWindowSize';
 import { cloneDeep } from "lodash";
 import ModalLayout0 from "../components/modal/0/Layout";
 import BannerLayout1 from "../components/banner/1/Layout";
+import { ReactComponent as LOGO1 } from '../components/logo/logo1.svg'
 
 const FORWARD = 'forward';
 const BACKWARD = 'backward';
@@ -114,8 +115,8 @@ const HomeLayout = () => {
   return (
     <div className={s.root}>
       <div className={s.navTop}>
-        <div>
-          notlogo
+        <div className={s.logo}>
+          <LOGO1 fill='white' stroke='white' transform='scale(0.7)' />
         </div>
         <div
           className={cx(s.burgerBtnWrapper, isBounceInDown && s.burgerBtnWrapperActive)}
@@ -278,9 +279,33 @@ const HomeLayout = () => {
         </div>
       </div>
       <BannerLayout1 title='PROJECTS' data={PROJECTS} />
-      <div className={s.banner2} style={{ background: 'green' }}>
-        FOOTER
-        last update 2023-07-16
+      <div className={s.footerWrapper}>
+        <div className={s.row} style={{ margin: 0 }}>
+          <GithubOutlined className={s.icon} />
+          <a
+            rel="noreferrer"
+            href="mailto:petermakwork@gmail.com">
+            <MailOutlined className={s.icon} />
+          </a>
+          <a
+            rel="noreferrer"
+            target='_blank'
+            href="https://api.whatsapp.com/send?phone=85293369792">
+            <WhatsAppOutlined className={s.icon} />
+          </a>
+          <LinkedinOutlined className={s.icon} />
+        </div>
+        <div className={s.row}>
+          <div className={s.text}>Top</div>
+          <div className={s.text}>History</div>
+          <div className={s.text}>Top</div>
+          <div className={s.text}>History</div>
+          <div className={s.text}>Top</div>
+          <div className={s.text}>History</div>
+        </div>
+        <div className={s.row}>
+          MLW Copyright © 2023 - All rights reserved || Designed By: MLW
+        </div>
       </div>
       <ModalLayout0
         isModalOpen={isModalOpen}
