@@ -6,22 +6,21 @@ import {
   GithubOutlined,
   WhatsAppOutlined,
   LinkedinOutlined,
-  ExportOutlined,
   CoffeeOutlined,
   AuditOutlined,
 } from '@ant-design/icons';
-import { Timeline, Result, } from "antd";
-import { PROJECTS, EXPERIENCE, SKILLS } from '../defaults';
+import { Timeline, } from "antd";
+import { PROJECTS, EXPERIENCE } from '../defaults';
 import useWindowSize from './../hook/useWindowSize';
 import { cloneDeep } from "lodash";
-import ModalLayout0 from "../components/modal/0/Layout";
-import BannerLayout1 from "../components/banner/1/Layout";
+import ModalLayout0 from "../components/modal/0/Modal";
+import BannerLayout1 from "../components/banner/1/Banner";
 import { ReactComponent as LOGO1 } from '../components/logo/logo1.svg'
-
+import Collapse0 from "../components/collapse/0/Collapse";
 const FORWARD = 'forward';
 const BACKWARD = 'backward';
 const PAUSE = 'pause';
-const words = 'A Web and App Developer';
+const words = 'A Full Stack Developer';
 
 const HomeLayout = () => {
   const { width } = useWindowSize();
@@ -118,12 +117,17 @@ const HomeLayout = () => {
         <div className={s.logo}>
           <LOGO1 fill='white' stroke='white' transform='scale(0.7)' />
         </div>
-        <div
-          className={cx(s.burgerBtnWrapper, isBounceInDown && s.burgerBtnWrapperActive)}
-          onClick={() => setIsBounceInDown(prev => !prev)}
-        >
-          <div className={s.burgerWrapper}>
-            <div className={s.hamburger} />
+        <div className={s.centerWrapper}>
+          <input className={s.toggle} type="checkbox" onChange={(e) => {
+            console.log('mlw value', e.target.checked)
+          }} />
+          <div
+            className={cx(s.burgerBtnWrapper, isBounceInDown && s.burgerBtnWrapperActive)}
+            onClick={() => setIsBounceInDown(prev => !prev)}
+          >
+            <div className={s.burgerWrapper}>
+              <div className={s.hamburger} />
+            </div>
           </div>
         </div>
       </div>
@@ -153,7 +157,7 @@ const HomeLayout = () => {
           </div>
         </div>
       </div>}
-      <div className={s.banner} style={{ background: '#23283e' }}>
+      <div className={s.banner} >
         <div>
           <div className={s.textBlock}>
             <div className={s.text}>
@@ -270,14 +274,15 @@ const HomeLayout = () => {
           ]}
         />
       </div>
-      <div className={s.banner2} style={{ background: 'linear-gradient(43deg,#4158d0,#c850c0 46%,#ffcc70)' }}>
+      {/* <div className={s.banner2} style={{ background: 'linear-gradient(43deg,#4158d0,#c850c0 46%,#ffcc70)' }}>
         Skills
         <div>
           {SKILLS.map((item, index) => {
             return <img key={`skill_${index}`} src={`/assets/${item}-ar21.svg`} alt='' />
           })}
         </div>
-      </div>
+      </div> */}
+      <Collapse0 />
       <BannerLayout1 title='PROJECTS' data={PROJECTS} />
       <div className={s.footerWrapper}>
         <div className={s.row} style={{ margin: 0 }}>

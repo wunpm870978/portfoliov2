@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect, useMemo } from "react";
-import s from './Layout.module.scss';
+import React from "react";
+import s from './Banner.module.scss';
 import {
   GithubOutlined,
   ExportOutlined,
 } from '@ant-design/icons';
-import { Result, } from "antd";
 
 const BannerLayout1 = ({
   title,
