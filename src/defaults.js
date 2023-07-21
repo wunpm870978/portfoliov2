@@ -1,7 +1,10 @@
 export const PROJECTS = [
   {
     type: 'done',
-    images: [],
+    images: [
+      '/assets/projects/portfolio_0.png',
+      '/assets/projects/portfolio_1.png'
+    ],
     title: 'Responsive Portfolio',
     description: 'A fully responsive website displaying personal portfolio with simple and awesome css aniamtion',
     lang: ['ReactJS', 'SCSS']

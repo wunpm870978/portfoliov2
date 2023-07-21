@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
 import s from './Collapse.module.scss';
-import {
-  DownOutlined,
-} from '@ant-design/icons';
+import cx from 'classnames';
+
 const Collapse0 = () => {
   const codeRef = useRef(null);
   const frontendRef = useRef(null);
@@ -14,16 +13,20 @@ const Collapse0 = () => {
   const [isBackendCollapse, setIsBackendCollapse] = useState(false);
   const [isDatabaseCollapse, setIsDatabaseCollapse] = useState(false);
   const [isCloudCollapse, setIsCloudCollapse] = useState(false);
-  // Home EXP PROJECTS AboutMe Resume
 
-  // Code: JS, python
-  // FrontEnd: React,css,scss,html
-  // backend: expressjs, nodejs, django
-  // database: mysql, mongodb, dynamodb
-  // Cloud Infra-Architecture: aws lambda, github
+  const arrowRender = (state) => {
+    return <div className={cx(
+      s['arrow-icon'],
+      state && s.open
+    )}>
+      <span className={s['left-bar']}></span>
+      <span className={s['right-bar']}></span>
+    </div>
+  }
 
   return (
     <div className={s.termsCollapseWrapper}>
+      <div className={s.headerTitle}>SKILLS</div>
       <div
         ref={codeRef}
         className={s.termsContainer}
@@ -34,12 +37,12 @@ const Collapse0 = () => {
       >
         <div className={s.title}>
           Code
-          <DownOutlined rotate={isCodeCollapse ? 180 : 0} />
+          {arrowRender(isCodeCollapse)}
         </div>
         <div className={s.bannerWrapper}>
           <div className={s.banner}>
             <div className={s.block}>
-              JS
+              javascript
             </div>
             <div className={s.block}>
               python
@@ -57,12 +60,12 @@ const Collapse0 = () => {
       >
         <div className={s.title}>
           FrontEnd
-          <DownOutlined rotate={isFrontendCollapse ? 180 : 0} />
+          {arrowRender(isFrontendCollapse)}
         </div>
         <div className={s.bannerWrapper}>
           <div className={s.banner}>
             <div className={s.block}>
-              React
+              react
             </div>
             <div className={s.block}>
               css
@@ -86,7 +89,7 @@ const Collapse0 = () => {
       >
         <div className={s.title}>
           Backend
-          <DownOutlined rotate={isBackendCollapse ? 180 : 0} />
+          {arrowRender(isBackendCollapse)}
         </div>
         <div className={s.bannerWrapper}>
           <div className={s.banner}>
@@ -112,7 +115,7 @@ const Collapse0 = () => {
       >
         <div className={s.title}>
           database
-          <DownOutlined rotate={isDatabaseCollapse ? 180 : 0} />
+          {arrowRender(isDatabaseCollapse)}
         </div>
         <div className={s.bannerWrapper}>
           <div className={s.banner}>
@@ -138,7 +141,7 @@ const Collapse0 = () => {
       >
         <div className={s.title}>
           Cloud
-          <DownOutlined rotate={isCloudCollapse ? 180 : 0} />
+          {arrowRender(isCloudCollapse)}
         </div>
         <div className={s.bannerWrapper}>
           <div className={s.banner}>

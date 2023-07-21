@@ -4,6 +4,7 @@ import {
   GithubOutlined,
   ExportOutlined,
 } from '@ant-design/icons';
+import { Tag } from 'antd';
 
 const BannerLayout1 = ({
   title,
@@ -11,7 +12,7 @@ const BannerLayout1 = ({
 }) => {
   return (
     <div className={s.memo}>
-      <div className={s.headerTitlte}>
+      <div className={s.headerTitle}>
         {title}
       </div>
       <div className={s.flexBlock}>
@@ -23,12 +24,16 @@ const BannerLayout1 = ({
                 <div className={s.imageWrapper}>
                   {obj.images.map((item, idx) => {
                     return <img
-                      className={s.img}
+                      className={s[`img${idx}`]}
                       src={item}
                       key={`project_img_${idx}`}
                       alt=''
                     />
                   })}
+                  {obj.type === 'working' && <Tag color="geekblue">
+                    In-progress
+                  </Tag>
+                  }
                 </div>
                 <div className={s.description}>{obj.description}</div>
                 <div className={s.langTag}>
@@ -43,8 +48,10 @@ const BannerLayout1 = ({
                   <ExportOutlined />
                 </div>
               </React.Fragment>
-              : <div>
-                
+              : <div className={s.tbc}>
+                <div>To</div>
+                <div>Be</div>
+                <div>Continue</div>
               </div>
             }
           </div>
