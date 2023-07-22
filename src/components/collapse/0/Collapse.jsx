@@ -31,7 +31,7 @@ const Collapse0 = () => {
         ref={codeRef}
         className={s.termsContainer}
         style={{
-          maxHeight: isCodeCollapse ? codeRef.current.scrollHeight : '59px',
+          maxHeight: isCodeCollapse ? codeRef.current.scrollHeight : '79px',
         }}
         onClick={() => setIsCodeCollapse(prev => !prev)}
       >
@@ -54,12 +54,12 @@ const Collapse0 = () => {
         ref={frontendRef}
         className={s.termsContainer}
         style={{
-          maxHeight: isFrontendCollapse ? frontendRef.current.scrollHeight : '59px',
+          maxHeight: isFrontendCollapse ? frontendRef.current.scrollHeight : '79px',
         }}
         onClick={() => setIsFrontendCollapse(prev => !prev)}
       >
         <div className={s.title}>
-          FrontEnd
+          Frontend
           {arrowRender(isFrontendCollapse)}
         </div>
         <div className={s.bannerWrapper}>
@@ -83,7 +83,7 @@ const Collapse0 = () => {
         ref={backendRef}
         className={s.termsContainer}
         style={{
-          maxHeight: isBackendCollapse ? backendRef.current.scrollHeight : '59px',
+          maxHeight: isBackendCollapse ? backendRef.current.scrollHeight : '79px',
         }}
         onClick={() => setIsBackendCollapse(prev => !prev)}
       >
@@ -109,12 +109,12 @@ const Collapse0 = () => {
         ref={databaseRef}
         className={s.termsContainer}
         style={{
-          maxHeight: isDatabaseCollapse ? databaseRef.current.scrollHeight : '59px',
+          maxHeight: isDatabaseCollapse ? databaseRef.current.scrollHeight : '79px',
         }}
         onClick={() => setIsDatabaseCollapse(prev => !prev)}
       >
         <div className={s.title}>
-          database
+          Database
           {arrowRender(isDatabaseCollapse)}
         </div>
         <div className={s.bannerWrapper}>
@@ -135,7 +135,7 @@ const Collapse0 = () => {
         ref={cloudRef}
         className={s.termsContainer}
         style={{
-          maxHeight: isCloudCollapse ? cloudRef.current.scrollHeight : '59px',
+          maxHeight: isCloudCollapse ? cloudRef.current.scrollHeight : '79px',
         }}
         onClick={() => setIsCloudCollapse(prev => !prev)}
       >

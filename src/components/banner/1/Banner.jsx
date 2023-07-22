@@ -1,23 +1,81 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import s from './Banner.module.scss';
 import {
   GithubOutlined,
   ExportOutlined,
+  LeftOutlined,
+  RightOutlined,
 } from '@ant-design/icons';
 import { Tag } from 'antd';
 
 const BannerLayout1 = ({
   title,
   data,
+  screenWidth,
 }) => {
+  const [swiperIndex, setSwiperIndex] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0)
+
+  const swiperRef = useRef(null)
+  const handleSlideChange = (type) => {
+    if (type === 'prev') {
+      screenWidth > 768
+        ? swiperRef.current.scrollTo({
+          left: swiperRef.current.scrollLeft - 400,
+          behavior: "smooth"
+        })
+        : setSwiperIndex(prev => prev - 1 < 0
+          ? data.length - 1
+          : prev - 1
+        )
+    } else {
+      screenWidth > 768
+        ? swiperRef.current.scrollTo({
+          left: swiperRef.current.scrollLeft + 400,
+          behavior: "smooth"
+        })
+        : setSwiperIndex(prev => prev + 1 === data.length
+          ? 0
+          : prev + 1
+        )
+    }
+  }
+
+  useEffect(() => {
+    if (swiperRef.current) {
+      var maxHeight = 0
+      for (const node of swiperRef.current.childNodes) {
+        maxHeight = Math.max(maxHeight, node.offsetHeight)
+      }
+      setContainerWidth(maxHeight + 70)
+    }
+  }, [])
+
   return (
     <div className={s.memo}>
       <div className={s.headerTitle}>
         {title}
       </div>
-      <div className={s.flexBlock}>
+      <div
+        ref={swiperRef}
+        className={s.flexBlock}
+        style={screenWidth <= 768
+          ? { height: containerWidth }
+          : {}}
+      >
         {data.map((obj, index) => {
-          return <div key={`project_${index}`} className={s.block}>
+          return <div
+            key={`project_${index}`}
+            className={s.block}
+            style={screenWidth <= 768
+              ? {
+                opacity: swiperIndex === index
+                  ? 1
+                  : 0
+              }
+              : {}
+            }
+          >
             {obj.type !== 'TBC'
               ? <React.Fragment>
                 <div className={s.title}>{obj.title}</div>
@@ -57,6 +115,22 @@ const BannerLayout1 = ({
           </div>
         })}
       </div>
+      {
+        screenWidth <= 1200 && <div className={s.swiperWrapper}>
+          <div
+            className={s.iconContainer}
+            onClick={() => handleSlideChange('prev')}
+          >
+            <LeftOutlined className={s.icon} />
+          </div>
+          <div
+            className={s.iconContainer}
+            onClick={() => handleSlideChange('next')}
+          >
+            <RightOutlined className={s.icon} />
+          </div>
+        </div>
+      }
     </div>
   )
 }

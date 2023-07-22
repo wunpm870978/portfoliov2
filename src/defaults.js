@@ -2,8 +2,8 @@ export const PROJECTS = [
   {
     type: 'done',
     images: [
-      '/assets/projects/portfolio_0.png',
-      '/assets/projects/portfolio_1.png'
+      '/portfoliov2/assets/projects/portfolio_0.png',
+      '/portfoliov2/assets/projects/portfolio_1.png'
     ],
     title: 'Responsive Portfolio',
     description: 'A fully responsive website displaying personal portfolio with simple and awesome css aniamtion',
@@ -11,7 +11,7 @@ export const PROJECTS = [
   },
   {
     type: 'working',
-    images: ['/assets/working.jpg'],
+    images: ['/portfoliov2/assets/working.jpg'],
     title: 'Course Registration System',
     description: 'A system admin panel allowing differnt roles to tackle account affairs like course CURD, registration & schedule planning',
     lang: ['ReactJS', 'SCSS', 'ExpressJS', 'MongDB']

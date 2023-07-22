@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import React, { useState, useRef, useEffect, useMemo, useContext } from "react";
 import s from './Home.module.scss';
-import cx from 'classnames';
 import {
   MailOutlined,
   GithubOutlined,
@@ -9,43 +8,66 @@ import {
   CoffeeOutlined,
   AuditOutlined,
 } from '@ant-design/icons';
-import { Timeline, ConfigProvider } from "antd";
+import { Timeline, ConfigProvider, Tour } from "antd";
 import { PROJECTS, EXPERIENCE } from '../defaults';
 import useWindowSize from './../hook/useWindowSize';
 import { cloneDeep } from "lodash";
 import ModalLayout0 from "../components/modal/0/Modal";
 import BannerLayout1 from "../components/banner/1/Banner";
-import { ReactComponent as LOGO1 } from '../components/logo/logo1.svg'
 import Collapse0 from "../components/collapse/0/Collapse";
-import Footer0 from "../components/footer/0/Footer";
+import { rootContext, rootContextMethods } from '../App';
+
+
 const FORWARD = 'forward';
 const BACKWARD = 'backward';
 const PAUSE = 'pause';
 const words = 'A Full Stack Developer';
 
 const HomeLayout = () => {
-  const { width } = useWindowSize();
+  const { width, height } = useWindowSize();
   const autoTypeRef = useRef(null)
   const direction = useRef(FORWARD);
   const speedRef = useRef(300)
   const typingInterval = useRef();
-  const [isBounceInDown, setIsBounceInDown] = useState(false)
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const workRef = useRef(null);
+  const eduRef = useRef(null);
+  const timeLineRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isDesktop, setIsDesktop] = useState(width > 768);
   const [descBody, setDescBody] = useState({});
-  const [isLightTheme, setIsLightTheme] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const sortedExperience = useMemo(() => {
     return cloneDeep(EXPERIENCE.reverse())
   }, [])
 
+  const {
+    isLightTheme,
+    isTourBegin,
+    isFired,
+    isDesktop
+  } = useContext(rootContext);
+  const { setReducerState } = useContext(rootContextMethods);
+
+  const observer = useMemo(() => new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setIsInView(entry.isIntersecting)
+      }
+    }
+  ), [timeLineRef])
+
 
   useEffect(() => {
     const typeLetter = () => {
-      if (!autoTypeRef.current.innerHTML) {
+      if (
+        autoTypeRef.current &&
+        !autoTypeRef.current.innerHTML
+      ) {
         autoTypeRef.current.innerHTML = ''
       }
-      if (autoTypeRef.current.innerHTML.length !== words.length) {
+      if (
+        autoTypeRef.current &&
+        autoTypeRef.current.innerHTML.length !== words.length
+      ) {
         autoTypeRef.current.innerHTML += words[autoTypeRef.current.innerHTML.length]
       } else {
         direction.current = PAUSE;
@@ -53,7 +75,10 @@ const HomeLayout = () => {
       }
     }
     const backspace = () => {
-      if (autoTypeRef.current.innerHTML.length !== 0) {
+      if (
+        autoTypeRef.current &&
+        autoTypeRef.current.innerHTML.length !== 0
+      ) {
         autoTypeRef.current.innerHTML = autoTypeRef.current.innerHTML.slice(0, autoTypeRef.current.innerHTML.length - 1)
       } else {
         direction.current = PAUSE
@@ -62,7 +87,10 @@ const HomeLayout = () => {
     const waiting = () => {
       clearInterval(typingInterval.current)
       setTimeout(() => {
-        if (autoTypeRef.current.innerHTML.length !== 0) {
+        if (
+          autoTypeRef.current &&
+          autoTypeRef.current.innerHTML.length !== 0
+        ) {
           direction.current = BACKWARD;
           speedRef.current = 100;
         } else {
@@ -92,10 +120,6 @@ const HomeLayout = () => {
     }
   }, []);
 
-  useEffect(() => {
-    setIsDesktop(width > 768)
-  }, [width])
-
   const handleDescChange = (idx) => {
     const result = sortedExperience.find((_, index) => index === idx - 1)
     setDescBody(result)
@@ -112,69 +136,46 @@ const HomeLayout = () => {
     </a>
   }
 
-  useEffect(() => {
-    if (isBounceInDown) {
-      setIsNavOpen(true)
-    } else {
+  const handleScrollDown = () => {
+    const rootRef = document.getElementById('rootRef');
+    if (rootRef) {
+      rootRef.scrollTo({
+        top: height,
+        behavior: 'smooth'
+      })
       setTimeout(() => {
-        setIsNavOpen(false)
-      }, 1000)
+        setReducerState({ isTourBegin: true })
+        setReducerState({ isFired: true })
+      }, 800)
     }
+  }
 
-  }, [isBounceInDown])
+  const steps = [
+    {
+      title: 'Work experience',
+      description: 'Click to see the highligts of this job',
+      target: () => workRef.current,
+    },
+    {
+      title: 'Education',
+      description: "Click to see what I've learnt in this programme",
+      target: () => eduRef.current,
+    },
+  ];
+
+  useEffect(() => {
+    observer.observe(timeLineRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (isInView) {
+      handleScrollDown()
+    }
+  }, [isInView])
 
   return (
-    <div className={s.root}>
-      <div className={s.navTop}>
-        <div className={s.logo}>
-          <LOGO1
-            fill={isLightTheme ? '#23283e' : 'hsl(240, 100%, 95%)'}
-            stroke={isLightTheme ? '#23283e' : 'hsl(240, 100%, 95%)'}
-            transform='scale(0.7)'
-          />
-        </div>
-        <div className={s.centerWrapper}>
-          <input
-            className={s.toggle}
-            type="checkbox"
-            onChange={(e) => setIsLightTheme(e.target.checked)}
-          />
-          <div
-            className={cx(s.burgerBtnWrapper, isBounceInDown && s.burgerBtnWrapperActive)}
-            onClick={() => setIsBounceInDown(prev => !prev)}
-          >
-            <div className={s.burgerWrapper}>
-              <div className={s.hamburger} />
-            </div>
-          </div>
-        </div>
-      </div>
-      {isNavOpen && <div
-        className={cx(s.menu, `animate__animated ${isBounceInDown
-          ? 'animate__bounceInDown'
-          : 'animate__bounceOutUp'}`
-        )}
-      >
-        <div className={s.itemWrapper}>
-          <div className={s.item}>
-            <div className={s.menuItem}>
-              Home
-            </div>
-            <div className={s.menuItem}>
-              HISTORY
-            </div>
-            <div className={s.menuItem}>
-              PROJECTS
-            </div>
-            <div className={s.menuItem}>
-              CONTACT
-            </div>
-          </div>
-          <div className={s.item}>
-            i am text
-          </div>
-        </div>
-      </div>}
+    <React.Fragment>
       <div className={s.banner} >
         <div>
           <div className={s.textBlock}>
@@ -194,13 +195,18 @@ const HomeLayout = () => {
           </div>
           <div className={s.imgBlock} />
         </div>
-        <div className={s.arrow}>
+        <div
+          className={s.arrow}
+          onClick={handleScrollDown}
+        >
           <span></span>
           <span></span>
           <span></span>
         </div>
       </div>
-      <div className={s.banner2} style={{ height: 'auto' }}>
+      <div
+        ref={timeLineRef}
+        className={s.banner2} style={{ height: 'auto', marginTop: '10px' }}>
         <div className={s.headerTitlte}>
           HISTORY
         </div>
@@ -225,7 +231,10 @@ const HomeLayout = () => {
                 label: 'June 2022 - Present',
                 color: '#D1900A',
                 dot: <CoffeeOutlined />,
-                children: <div onClick={() => handleDescChange(6)}>
+                children: <div
+                  ref={workRef}
+                  onClick={() => handleDescChange(6)}
+                >
                   <div className={s.textTitle}>
                     Web developer
                   </div>
@@ -237,7 +246,10 @@ const HomeLayout = () => {
               {
                 label: '2021-2022',
                 dot: <AuditOutlined />,
-                children: <div onClick={() => handleDescChange(5)}>
+                children: <div
+                  ref={eduRef}
+                  onClick={() => handleDescChange(5)}
+                >
                   <div className={s.textTitle}>
                     MSc INFORMATION TECHNOLOGY
                   </div>
@@ -300,16 +312,24 @@ const HomeLayout = () => {
           />
         </ConfigProvider>
       </div>
-      <BannerLayout1 title='PROJECTS' data={PROJECTS} />
+      <Tour
+        open={isTourBegin && isFired}
+        onClose={() => setReducerState({ isTourBegin: false })}
+        steps={steps}
+      />
+      <BannerLayout1
+        title='PROJECTS'
+        data={PROJECTS}
+        screenWidth={width}
+      />
       <Collapse0 />
-      <Footer0 />
       <ModalLayout0
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         data={descBody}
         isDesktop={isDesktop}
       />
-    </div>
+    </React.Fragment>
   )
 }
 

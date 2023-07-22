@@ -70,7 +70,7 @@ $duration: 0.5s;
       width: 100%;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 0px;
+      padding: 30px 0px;
       font-size: 19px;
       line-height: 1;
       font-family: 'Quicksand', sans-serif;
@@ -149,6 +149,26 @@ $duration: 0.5s;
 
 }
 
+@media only screen and (max-width:1000px) {
+  .termsCollapseWrapper {
+    max-width: 85% !important;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .termsCollapseWrapper {
+
+    .termsContainer {
+      width: auto;
+
+      .title {
+        width: auto;
+        padding: 30px 20px;
+      }
+    }
+  }
+}
+
 @media only screen and (max-width:500px) {
   .banner {
     grid-template-columns: 100%;
@@ -156,11 +176,16 @@ $duration: 0.5s;
   }
 
   .termsCollapseWrapper {
-    width: 100%;
+    width: auto;
+    max-width: 100% !important;
     margin: 0;
 
     .termsContainer {
       padding: 0px 20px;
+      .title {
+        width: auto;
+        padding: 30px 0px;
+      }
     }
   }
 }

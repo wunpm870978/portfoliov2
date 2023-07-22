@@ -29,8 +29,6 @@ const Banner0 = ({
     if (swiperRef.current) {
       setContainerWidth(swiperRef.current.offsetWidth)
     }
-
-
   }, [])
 
 

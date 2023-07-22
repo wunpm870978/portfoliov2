@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react'
-import s from './Swiper
-.module.scss';
+import s from './Swiper.module.scss';
 
 const SwiperLayout = ({
   data,

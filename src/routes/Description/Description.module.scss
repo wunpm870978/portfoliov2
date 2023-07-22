@@ -1,0 +1,109 @@
+.root {
+  width: 100vw !important;
+  max-width: 100% !important;
+  position: relative;
+  padding-top: 90px;
+  height: 100%;
+}
+
+.descWrapper {
+  display: flex;
+  max-width: 1440px;
+  margin: 60px auto;
+  background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+  position: relative;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: #11111a1a 0 4px 16px, #11111a1a 0 8px 24px, #11111a1a 0 16px 56px !important;
+
+  .textContainer {
+    display: block;
+    width: 60%;
+    position: relative;
+    font-family: 'Waiting for the Sunrise', cursive;
+    line-height: 1;
+
+    .headerTitle {
+      font-size: 50px;
+      margin-bottom: 30px;
+    }
+
+    .text {
+      font-size: 35px;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+  }
+
+  .imgWrapper {
+    width: 40%;
+    background-image: url('../../../public/assets/idea.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .descWrapper {
+    max-width: 80%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .descWrapper .textContainer {
+    .headerTitle {
+      font-size: 45px;
+    }
+
+    .text {
+      font-size: 30px;
+      line-height: 1.5;
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .descWrapper .textContainer {
+    .headerTitle {
+      font-size: 40px;
+      margin-bottom: 25px;
+    }
+
+    .text {
+      font-size: 30px;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .descWrapper .textContainer {
+    .headerTitle {
+      font-size: 40px;
+      margin-bottom: 25px;
+    }
+
+    .text {
+      font-size: 25px;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .descWrapper {
+    flex-wrap: wrap;
+    .textContainer {
+      width: 100%;
+      flex-shrink: 0;
+    }
+    .imgWrapper{
+      width: 100%;
+      flex-shrink: 0;
+      min-height: 200px;
+    }
+  }
+}

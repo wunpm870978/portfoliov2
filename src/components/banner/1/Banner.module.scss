@@ -1,7 +1,9 @@
 .memo {
   width: 100%;
-  max-width: 100%;
+  max-width: 100% !important;
   padding: 30px;
+  position: relative;
+  box-sizing: border-box;
 }
 
 .headerTitle {
@@ -19,6 +21,7 @@
   display: flex;
   gap: 2em;
   justify-content: center;
+  position: relative;
 
   .block {
     width: 300px;
@@ -122,4 +125,92 @@
   .block:hover {
     transform: translateY(-10px);
   }
+}
+
+.memo .flexBlock::-webkit-scrollbar {
+  display: none;
+  scroll-behavior: smooth;
+}
+
+@media only screen and (max-width: 1200px) {
+  .memo {
+    padding: 30px 0px;
+    margin: 0 !important;
+
+    .flexBlock {
+      overflow-x: scroll;
+      justify-content: start;
+      gap: 5em;
+      padding: 25px 0px;
+      max-width: 100% !important;
+      margin: 0 !important;
+
+      .block {
+        flex-shrink: 0;
+      }
+
+      .block:first-child {
+        margin-left: 60px;
+      }
+
+      .block:last-child {
+        margin-right: 60px;
+      }
+    }
+
+    .swiperWrapper {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      position: absolute;
+      top: calc(50% + 60px);
+      left: 0;
+      transform: translateY(-50%);
+
+      .iconContainer {
+        display: flex;
+        width: 2.5em;
+        height: 2.5em;
+        justify-content: center;
+        align-items: center;
+        background-color: #d1c4e9aa;
+        z-index: 1;
+        cursor: pointer;
+
+        .icon {
+          transition: all 0.4s ease-in;
+          font-size: 2em;
+          color: var(--theme-color);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .icon:active {
+    font-size: 1em;
+  }
+
+  .block {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 1s ease-in-out;
+    margin: 20px 0px !important;
+    padding: 30px 20px !important;
+    min-height: 400px;
+  }
+
+  .tbc{
+    position: absolute !important;
+    left: 50%;
+    transform: translate(-50%,-50%) rotate(15deg) !important;
+  }
+
+  .block:hover {
+    transform: translateX(-50%) !important;
+  }
+
 }
