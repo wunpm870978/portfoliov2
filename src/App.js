@@ -4,7 +4,7 @@ import MainLayout from "./routes/mainLayout/MainLayout";
 import HomeLayout from "./routes/Home";
 import useWindowSize from "./hook/useWindowSize";
 import 'animate.css';
-import SinglePage from "./components/pdf/0/PDF.pdf";
+import SinglePage from "./components/pdf/0/PdfLayout";
 import resume from "./assets/resume.pdf";
 import { pdfjs } from 'react-pdf';
 import Description from "./routes/Description/Description";
