@@ -1,23 +1,18 @@
-import { BrowserRouter, Routes, Route, RouterProvider, createHashRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useReducer, createContext, useEffect } from 'react';
 import MainLayout from "./routes/mainLayout/MainLayout";
 import HomeLayout from "./routes/Home";
 import useWindowSize from "./hook/useWindowSize";
 import 'animate.css';
 import SinglePage from "./components/pdf/0/PdfLayout";
-import resume from "./assets/resume.pdf";
+// import resume from "./assets/resume.pdf";
 import { pdfjs } from 'react-pdf';
 import Description from "./routes/Description/Description";
-
+// import { pdf_base64 } from './assets/resume';
 
 export const rootContext = createContext();
 export const rootContextMethods = createContext();
-const router = createHashRouter([
-  {
-    path: "/*",
-    element: <App />,
-  }
-]);
+
 function App() {
   const { width, height } = useWindowSize();
   const InitialState = {
@@ -68,36 +63,34 @@ function App() {
   }, [height])
 
   useEffect(() => {
-    pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-      'pdfjs-dist/build/pdf.worker.min.js',
-      import.meta.url,
-    ).toString();
+    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
+    // pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+    //   'pdfjs-dist/build/pdf.worker.min.js',
+    //   import.meta.url,
+    // ).toString();
   }, [])
 
   return (
     <rootContext.Provider value={state}>
       <rootContextMethods.Provider value={methods}>
-        <RouterProvider router={router}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/resume" element={
-                <MainLayout>
-                  <SinglePage pdf={resume} />
-                </MainLayout>
-              } />
-              <Route path="/me" element={
-                <MainLayout>
-                  <Description />
-                </MainLayout>
-              } />
-              <Route index path="/*" element={
-                <MainLayout>
-                  <HomeLayout />
-                </MainLayout>
-              } />
-            </Routes>
-          </BrowserRouter>
-        </RouterProvider>
+        <Routes>
+          <Route path="/resume" element={
+            <MainLayout>
+              <SinglePage pdf={'https://wunpm870978.github.io/portfoliov2/assets/resume.pdf'} />
+            </MainLayout>
+          } />
+          <Route path="/me" element={
+            <MainLayout>
+              <Description />
+            </MainLayout>
+          } />
+          <Route index path="/*" element={
+            <MainLayout>
+              <HomeLayout />
+            </MainLayout>
+          } />
+        </Routes>
       </rootContextMethods.Provider>
     </rootContext.Provider>
   );
