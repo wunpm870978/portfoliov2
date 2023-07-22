@@ -1,10 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, RouterProvider, createHashRouter } from "react-router-dom";
 import React, { useReducer, createContext, useEffect } from 'react';
 import MainLayout from "./routes/mainLayout/MainLayout";
 import HomeLayout from "./routes/Home";
 import useWindowSize from "./hook/useWindowSize";
 import 'animate.css';
-import SinglePage from "./components/pdf/0/PDF";
+import SinglePage from "./components/pdf/0/PDF.pdf";
 import resume from "./assets/resume.pdf";
 import { pdfjs } from 'react-pdf';
 import Description from "./routes/Description/Description";
@@ -12,7 +12,12 @@ import Description from "./routes/Description/Description";
 
 export const rootContext = createContext();
 export const rootContextMethods = createContext();
-
+const router = createHashRouter([
+  {
+    path: "/*",
+    element: <App />,
+  }
+]);
 function App() {
   const { width, height } = useWindowSize();
   const InitialState = {
@@ -72,25 +77,27 @@ function App() {
   return (
     <rootContext.Provider value={state}>
       <rootContextMethods.Provider value={methods}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/resume" element={
-              <MainLayout>
-                <SinglePage pdf={resume} />
-              </MainLayout>
-            } />
-            <Route path="/me" element={
-              <MainLayout>
-                <Description />
-              </MainLayout>
-            } />
-            <Route index path="/*" element={
-              <MainLayout>
-                <HomeLayout />
-              </MainLayout>
-            } />
-          </Routes>
-        </BrowserRouter>
+        <RouterProvider router={router}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/resume" element={
+                <MainLayout>
+                  <SinglePage pdf={resume} />
+                </MainLayout>
+              } />
+              <Route path="/me" element={
+                <MainLayout>
+                  <Description />
+                </MainLayout>
+              } />
+              <Route index path="/*" element={
+                <MainLayout>
+                  <HomeLayout />
+                </MainLayout>
+              } />
+            </Routes>
+          </BrowserRouter>
+        </RouterProvider>
       </rootContextMethods.Provider>
     </rootContext.Provider>
   );
