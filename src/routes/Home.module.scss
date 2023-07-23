@@ -248,6 +248,10 @@
 
 @media only screen and (max-width: 500px) {
   .banner {
+    >div {
+      max-width: 90% !important;
+    }
+
     .textBlock {
       width: 100%;
 
@@ -259,6 +263,13 @@
       .typewriter {
         height: 2.5rem;
       }
+    }
+  }
+
+  :global {
+    .ant-tour {
+      width: 98% !important;
+      left: 1% !important;
     }
   }
 }

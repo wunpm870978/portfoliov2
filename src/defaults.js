@@ -7,21 +7,24 @@ export const PROJECTS = [
     ],
     title: 'Responsive Portfolio',
     description: 'A fully responsive website displaying personal portfolio with simple and awesome css aniamtion',
-    lang: ['ReactJS', 'SCSS']
+    lang: ['ReactJS', 'SCSS'],
+    url: ['https://github.com/wunpm870978/portfoliov2']
   },
   {
     type: 'working',
     images: ['/portfoliov2/assets/working.jpg'],
     title: 'Course Registration System',
     description: 'A system admin panel allowing differnt roles to tackle account affairs like course CURD, registration & schedule planning',
-    lang: ['ReactJS', 'SCSS', 'ExpressJS', 'MongDB']
+    lang: ['ReactJS', 'SCSS', 'ExpressJS', 'MongDB'],
+    url: []
   },
   {
     type: 'TBC',
     images: [],
     title: '',
     description: '',
-    lang: []
+    lang: [],
+    url: []
   },
 ]
 

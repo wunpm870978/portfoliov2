@@ -41,6 +41,14 @@ const BannerLayout1 = ({
     }
   }
 
+  const handleRedirectUrl = (payload) => {
+    if (payload.length === 1) {
+      window.open(payload[0], '_blank');
+    } else if (payload.length > 1) {
+
+    }
+  }
+
   useEffect(() => {
     if (swiperRef.current) {
       var maxHeight = 0
@@ -102,8 +110,8 @@ const BannerLayout1 = ({
                   })}
                 </div>
                 <div className={s.iconWrapper}>
-                  <GithubOutlined />
-                  <ExportOutlined />
+                  <GithubOutlined onClick={() => handleRedirectUrl[obj.url]} />
+                  <ExportOutlined onClick={() => handleRedirectUrl[obj.url]} />
                 </div>
               </React.Fragment>
               : <div className={s.tbc}>

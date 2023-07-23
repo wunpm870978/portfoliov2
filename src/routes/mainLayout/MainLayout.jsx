@@ -20,6 +20,14 @@ const MainLayout = ({ children }) => {
   const location = useLocation();
   const { height } = useWindowSize();
 
+  const scrollToTop = () => {
+    if (rootRef.current) {
+      rootRef.current.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
+  }
 
 
   useEffect(() => {
@@ -40,7 +48,7 @@ const MainLayout = ({ children }) => {
 
   return (<div id='rootRef' ref={rootRef} className={s.root}>
     <div className={s.navTop}>
-      <div className={s.logo}>
+      <div className={s.logo} onClick={scrollToTop}>
         <LOGO1
           fill={isLightTheme ? '#23283e' : 'hsl(240, 100%, 95%)'}
           stroke={isLightTheme ? '#23283e' : 'hsl(240, 100%, 95%)'}
