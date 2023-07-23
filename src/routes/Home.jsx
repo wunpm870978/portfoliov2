@@ -36,7 +36,8 @@ const HomeLayout = () => {
   const [descBody, setDescBody] = useState({});
   const [isInView, setIsInView] = useState(false);
   const sortedExperience = useMemo(() => {
-    return cloneDeep(EXPERIENCE.reverse())
+    const clonedObj = cloneDeep(EXPERIENCE);
+    return cloneDeep(clonedObj.reverse())
   }, [])
 
   const {
@@ -173,6 +174,8 @@ const HomeLayout = () => {
       handleScrollDown()
     }
   }, [isInView])
+
+  console.log('mlw sortedExperience', cloneDeep(sortedExperience))
 
   return (
     <React.Fragment>
