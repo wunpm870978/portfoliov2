@@ -175,8 +175,6 @@ const HomeLayout = () => {
     }
   }, [isInView])
 
-  console.log('mlw sortedExperience', cloneDeep(sortedExperience))
-
   return (
     <React.Fragment>
       <div className={s.banner} >

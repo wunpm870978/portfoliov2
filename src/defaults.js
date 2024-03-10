@@ -35,6 +35,7 @@ export const EXPERIENCE = [
     institution: 'Initial Innovation Limited',
     highlight: [
       'Enrich UI components and interactive user interfaces',
+      'Frontend and backend perofrmance optimization',
       'Integrate different APIs for e-commerce chatting, order notification and product image processing',
       'Optimize tracking tools from Facebook Pixel to Conversion API through middleware platform',
       'Scrape website data, extract details and be converted into desired format',
