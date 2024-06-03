@@ -1,0 +1,231 @@
+@mixin clearFix {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0px auto;
+}
+
+@mixin bannerWrapper {
+  width: 100%;
+  max-width: 100%;
+  padding: 30px;
+}
+
+.banner {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 101vh;
+  width: 100%;
+  max-width: 100%;
+
+  >div {
+    @include clearFix;
+    display: block;
+    position: relative;
+  }
+
+  .textBlock {
+    display: inline-block;
+    position: relative;
+    width: 50%;
+    vertical-align: middle;
+
+    >*,
+    >*>* {
+      color: var(--theme-color);
+    }
+
+    .text {
+      font-family: 'Waiting for the Sunrise', cursive;
+      font-size: 50px;
+      line-height: 1;
+      margin-bottom: 30px;
+      // color: white;
+    }
+
+    .contact {
+      display: flex;
+      gap: 50px;
+      line-height: 1.5;
+      padding: 10px 0px;
+      margin-top: 40px;
+    }
+  }
+
+  .imgBlock {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 50%;
+    background-image: url('../../../../public/assets/officeboy.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-size: contain;
+    aspect-ratio: 1;
+  }
+
+  .arrow {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    width: max-content !important;
+  }
+
+  .arrow span {
+    display: block;
+    width: 1.5vw;
+    height: 1.5vw;
+    border-bottom: 5px solid var(--theme-color);
+    border-right: 5px solid var(--theme-color);
+    transform: rotate(45deg);
+    margin: -10px;
+    animation: fadeinoutdown 3s infinite;
+  }
+
+  .arrow span:nth-child(2) {
+    animation-delay: -0.2s;
+  }
+
+  .arrow span:nth-child(3) {
+    animation-delay: -0.4s;
+  }
+}
+
+.icon {
+  cursor: pointer;
+  display: flex;
+  transition: all 0.4s ease-in;
+  font-size: 35px;
+}
+
+.icon:hover {
+  color: bisque;
+  transform: scale(1.2);
+}
+
+/* DEMO-SPECIFIC STYLES */
+.typewriter {
+  display: block;
+  width: max-content;
+  margin-bottom: 20px;
+  height: 50px;
+  text-align: start;
+  font-family: 'Waiting for the Sunrise', cursive;
+  font-size: 50px;
+  line-height: 1;
+  border-right: 4px solid orange;
+  padding-right: 3px;
+  animation: blink 0.5s ease infinite alternate-reverse;
+  color: white;
+}
+
+/* The typewriter cursor effect */
+@keyframes blink {
+
+  from,
+  to {
+    border-color: transparent
+  }
+
+  50% {
+    border-color: orange
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .banner {
+    >div {
+      max-width: 80%;
+    }
+
+    .textBlock {
+      .text {
+        font-size: 2rem;
+      }
+
+      .contact {
+        margin-top: 20px;
+
+        .icon {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+
+  .typewriter {
+    font-size: 2rem;
+    height: 2rem;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .banner .arrow {
+    bottom: 3rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .banner {
+    .textBlock {
+      width: 100%;
+
+      .text,
+      .typewriter {
+        font-size: 3rem;
+      }
+
+      .typewriter {
+        height: 3rem;
+      }
+    }
+
+    .imgBlock {
+      display: none;
+    }
+
+    .arrow {
+      bottom: 4rem;
+    }
+
+    .arrow>span {
+      width: 15px;
+      height: 15px;
+      border-bottom-width: 4px;
+      border-right-width: 4px;
+      margin: -8px;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .banner {
+    >div {
+      max-width: 90% !important;
+    }
+
+    .textBlock {
+      width: 100%;
+
+      .text,
+      .typewriter {
+        font-size: 2.5rem;
+      }
+
+      .typewriter {
+        height: 2.5rem;
+      }
+    }
+  }
+
+  :global {
+    .ant-tour {
+      width: 98% !important;
+      left: 1% !important;
+    }
+  }
+}

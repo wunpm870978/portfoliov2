@@ -10,111 +10,15 @@
   padding: 30px;
 }
 
-.banner {
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
-  max-width: 100%;
-
-  >div {
-    @include clearFix;
-    display: block;
-    position: relative;
-  }
-
-  .textBlock {
-    display: inline-block;
-    position: relative;
-    width: 50%;
-    vertical-align: middle;
-
-    >*,
-    >*>* {
-      color: var(--theme-color);
-    }
-
-    .text {
-      font-family: 'Waiting for the Sunrise', cursive;
-      font-size: 50px;
-      line-height: 1;
-      margin-bottom: 30px;
-      // color: white;
-    }
-
-    .contact {
-      display: flex;
-      gap: 50px;
-      line-height: 1.5;
-      padding: 10px 0px;
-      margin-top: 40px;
-
-      .icon {
-        cursor: pointer;
-        display: flex;
-        transition: all 0.4s ease-in;
-        font-size: 35px;
-      }
-
-      .icon:hover {
-        color: bisque;
-        transform: scale(1.2);
-      }
-    }
-  }
-
-  .imgBlock {
-    display: inline-block;
-    vertical-align: middle;
-    position: relative;
-    width: 50%;
-    background-image: url('../../public/assets/officeboy.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
-    background-size: contain;
-    aspect-ratio: 1;
-  }
-
-  .arrow {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-    width: max-content !important;
-  }
-
-  .arrow span {
-    display: block;
-    width: 1.5vw;
-    height: 1.5vw;
-    border-bottom: 5px solid var(--theme-color);
-    border-right: 5px solid var(--theme-color);
-    transform: rotate(45deg);
-    margin: -10px;
-    animation: fadeinoutdown 3s infinite;
-  }
-
-  .arrow span:nth-child(2) {
-    animation-delay: -0.2s;
-  }
-
-  .arrow span:nth-child(3) {
-    animation-delay: -0.4s;
-  }
-}
-
 .banner2 {
   width: 100%;
   max-width: 100%;
-  height: 500px;
+  // height: 500px;
+  height: auto;
   overflow: hidden;
   padding: 30px;
   box-sizing: border-box;
-  margin: 20px 0px;
+  margin: 10px 0px 20px 0px;
 
   >div {
     @include clearFix;
@@ -135,34 +39,6 @@
 }
 
 
-/* DEMO-SPECIFIC STYLES */
-.typewriter {
-  display: block;
-  width: max-content;
-  margin-bottom: 20px;
-  height: 50px;
-  text-align: start;
-  font-family: 'Waiting for the Sunrise', cursive;
-  font-size: 50px;
-  line-height: 1;
-  border-right: 4px solid orange;
-  padding-right: 3px;
-  animation: blink 0.5s ease infinite alternate-reverse;
-  color: white;
-}
-
-/* The typewriter cursor effect */
-@keyframes blink {
-
-  from,
-  to {
-    border-color: transparent
-  }
-
-  50% {
-    border-color: orange
-  }
-}
 
 @keyframes fadeinoutdown {
   0% {

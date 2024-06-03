@@ -1,10 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo, useContext } from "react";
 import s from './Home.module.scss';
 import {
-  MailOutlined,
-  GithubOutlined,
-  WhatsAppOutlined,
-  LinkedinOutlined,
   CoffeeOutlined,
   AuditOutlined,
 } from '@ant-design/icons';
@@ -16,19 +12,10 @@ import ModalLayout0 from "../components/modal/0/Modal";
 import BannerLayout1 from "../components/banner/1/Banner";
 import Collapse0 from "../components/collapse/0/Collapse";
 import { rootContext, rootContextMethods } from '../App';
-
-
-const FORWARD = 'forward';
-const BACKWARD = 'backward';
-const PAUSE = 'pause';
-const words = 'A Full Stack Developer';
+import GridLayout0 from "../components/Grid/0/Layout";
 
 const HomeLayout = () => {
-  const { width, height } = useWindowSize();
-  const autoTypeRef = useRef(null)
-  const direction = useRef(FORWARD);
-  const speedRef = useRef(300)
-  const typingInterval = useRef();
+  const { width } = useWindowSize();
   const workRef = useRef(null);
   const eduRef = useRef(null);
   const timeLineRef = useRef(null);
@@ -36,8 +23,7 @@ const HomeLayout = () => {
   const [descBody, setDescBody] = useState({});
   const [isInView, setIsInView] = useState(false);
   const sortedExperience = useMemo(() => {
-    const clonedObj = cloneDeep(EXPERIENCE);
-    return cloneDeep(clonedObj.reverse())
+    return cloneDeep(EXPERIENCE).reverse()
   }, [])
 
   const {
@@ -48,107 +34,12 @@ const HomeLayout = () => {
   } = useContext(rootContext);
   const { setReducerState } = useContext(rootContextMethods);
 
-  const observer = useMemo(() => new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setIsInView(entry.isIntersecting)
-      }
-    }
-  ), [timeLineRef])
-
-
-  useEffect(() => {
-    const typeLetter = () => {
-      if (
-        autoTypeRef.current &&
-        !autoTypeRef.current.innerHTML
-      ) {
-        autoTypeRef.current.innerHTML = ''
-      }
-      if (
-        autoTypeRef.current &&
-        autoTypeRef.current.innerHTML.length !== words.length
-      ) {
-        autoTypeRef.current.innerHTML += words[autoTypeRef.current.innerHTML.length]
-      } else {
-        direction.current = PAUSE;
-        speedRef.current = 2000;
-      }
-    }
-    const backspace = () => {
-      if (
-        autoTypeRef.current &&
-        autoTypeRef.current.innerHTML.length !== 0
-      ) {
-        autoTypeRef.current.innerHTML = autoTypeRef.current.innerHTML.slice(0, autoTypeRef.current.innerHTML.length - 1)
-      } else {
-        direction.current = PAUSE
-      }
-    }
-    const waiting = () => {
-      clearInterval(typingInterval.current)
-      setTimeout(() => {
-        if (
-          autoTypeRef.current &&
-          autoTypeRef.current.innerHTML.length !== 0
-        ) {
-          direction.current = BACKWARD;
-          speedRef.current = 100;
-        } else {
-          direction.current = FORWARD;
-          speedRef.current = 300;
-        }
-        typingInterval.current = setInterval(() => {
-          autoTypingAnimation()
-        }, speedRef.current)
-      }, 2000)
-    }
-    const autoTypingAnimation = () => {
-      if (direction.current === FORWARD) {
-        typeLetter();
-      } else if (direction.current === BACKWARD) {
-        backspace();
-      } else {
-        waiting()
-      }
-    }
-    autoTypeRef.current && (typingInterval.current = setInterval(() => {
-      autoTypingAnimation()
-    }, speedRef.current));
-
-    return () => {
-      clearInterval(typingInterval.current);
-    }
-  }, []);
 
   const handleDescChange = (idx) => {
-    const result = sortedExperience.find((_, index) => index === idx - 1)
-    setDescBody(result)
-    setIsModalOpen(true)
-  }
-
-  const IconWrapper = (url, Icon) => {
-    return <a
-      rel="noreferrer"
-      target='_blank'
-      href={url}
-    >
-      <Icon className={s.icon} />
-    </a>
-  }
-
-  const handleScrollDown = () => {
-    const rootRef = document.getElementById('rootRef');
-    if (rootRef) {
-      rootRef.scrollTo({
-        top: height,
-        behavior: 'smooth'
-      })
-      setTimeout(() => {
-        setReducerState({ isTourBegin: true })
-        setReducerState({ isFired: true })
-      }, 800)
-    }
+    setReducerState({ isTourBegin: false });
+    const result = sortedExperience.find((_, index) => index === idx - 1);
+    setDescBody(result);
+    setIsModalOpen(true);
   }
 
   const steps = [
@@ -165,49 +56,23 @@ const HomeLayout = () => {
   ];
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(entry.isIntersecting)
+        }
+      }
+    )
     observer.observe(timeLineRef.current)
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (isInView) {
-      handleScrollDown()
+    return () => {
+      observer.disconnect()
     }
-  }, [isInView])
+  }, [])
 
   return (
     <React.Fragment>
-      <div className={s.banner} >
-        <div>
-          <div className={s.textBlock}>
-            <div className={s.text}>
-              {'HI :)'}
-            </div>
-            <div className={s.text}>
-              I am Peter Mak
-            </div>
-            <div ref={autoTypeRef} className={s.typewriter}></div>
-            <div className={s.contact}>
-              {IconWrapper('https://github.com/wunpm870978', GithubOutlined)}
-              {IconWrapper('mailto:petermakwork@gmail.com', MailOutlined)}
-              {IconWrapper('https://api.whatsapp.com/send?phone=85293369792', WhatsAppOutlined)}
-              {IconWrapper('https://www.linkedin.com/in/peter-mak-648b64246', LinkedinOutlined)}
-            </div>
-          </div>
-          <div className={s.imgBlock} />
-        </div>
-        <div
-          className={s.arrow}
-          onClick={handleScrollDown}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-      <div
-        ref={timeLineRef}
-        className={s.banner2} style={{ height: 'auto', marginTop: '10px' }}>
+      <GridLayout0 isInView={isInView} />
+      <div ref={timeLineRef} className={s.banner2}>
         <div className={s.headerTitlte}>
           HISTORY
         </div>
